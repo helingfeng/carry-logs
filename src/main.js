@@ -1,3 +1,5 @@
+import cookie from 'js-cookie';
+
 ;(function (win, doc, scr, nav) {
 
     var carryServer = win.carryServer || 'https://tongji.helingfeng.com';
@@ -31,8 +33,14 @@
         return nav.language || $default;
     }
 
+    function getUserId() {
+        return ((+new Date()).toString(36) + Math.random().toString(36).substr(2, 3));
+    }
 
     function report(data, prefix) {
+
+
+
         data.visit_time = (new Date()).valueOf();
         data.random = Math.random();
 
