@@ -1,7 +1,6 @@
 ;(function (win, doc, scr, nav) {
 
-    var carryServer = carryServer || 'https://tongji.helingfeng.com';
-    var carryEvents = carryEvents || [];
+    var carryServer = win.carryServer || 'https://tongji.helingfeng.com';
 
     /* 网页描述 */
 
@@ -33,7 +32,7 @@
     }
 
 
-    function report(url, data, prefix) {
+    function report(data, prefix) {
         data.visit_time = (new Date()).valueOf();
         data.random = Math.random();
 
@@ -41,7 +40,7 @@
         image.src = carryServer + '/' + prefix + '.gif?' + httpBuildQuery(data);
     }
 
-    function reportPageView(data) {
+    function reportPageView(data = {}) {
         data.domain = getDomain();
         data.title = getTitle();
 
@@ -53,17 +52,14 @@
         report(data, 'page_view');
     }
 
-    function reportErrorLog(data) {
+    function reportErrorLog(data = {}) {
         data.user_agent = getUserAgent();
 
         report(data, 'error');
     }
 
-    function reportEvent(event) {
-        let data = {};
-        data.event = event;
-
-        report(data, 'event');
+    function reportEvent(event = {}) {
+        report(event, 'event');
     }
 
     function httpBuildQuery(param) {
@@ -92,22 +88,22 @@
     };
 
     var eventHandler = function () {
-        if (Object.prototype.toString.call(carryEvents) === '[object Array]') {
-            var queue = carryEvents || [];
-            carryEvents = {
+        if (Object.prototype.toString.call(win.carryEvents) === '[object Array]') {
+            var queue = win.carryEvents || [];
+            win.carryEvents = {
                 push: function (event) {
-                    reportEvent(carryServer, event, 'event');
+                    reportEvent(event);
                 }
             };
             // 处理未加载代码前事件
             while (queue.length > 0) {
-                carryEvents.push(queue.shift());
+                win.carryEvents.push(queue.shift());
             }
         }
 
         let param = {};
         param._in = 1;
-        reportPageView();
+        reportPageView(param);
     };
 
     if (doc.readyState !== 'loading') {

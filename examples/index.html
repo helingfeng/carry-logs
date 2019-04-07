@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试统计代码</title>
+    <script>
+
+        var carryServer = 'https://carry.helingfeng.com';
+        var carryEvents = [];
+        carryEvents.push({'track': '_trackEvent', 'action': 'music', 'label': 'play', 'value': 1});
+
+        (function () {
+            var _carry = document.createElement('script');
+            _carry.type = 'text/javascript';
+            _carry.async = true;
+            _carry.src = '../src/main.js';
+            var _script = document.getElementsByTagName('script')[0];
+            _script.parentNode.insertBefore(_carry, _script);
+        })();
+    </script>
+</head>
+<body>
+    <div>
+        <a href="javascript:carryEvents.push({'track': '_trackEvent', 'action': 'click', 'label': 'test', 'value': 1});">测试事件</a>
+    </div>
+</body>
+</html>
