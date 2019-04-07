@@ -1,46 +1,55 @@
-import cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 
 ;(function (win, doc, scr, nav) {
 
     var carryServer = win.carryServer || 'https://tongji.helingfeng.com';
+    var userCookieKey = 'carry_user_id';
 
-    /* 网页描述 */
-
+    // 获取域名
     function getDomain($default = 'github.com') {
         return doc.domain || $default;
     }
 
+    // 获取网页标题
     function getTitle($default = 'github') {
         return doc.title || $default;
     }
 
-
-    /* 浏览器设备参数 */
-
+    // 获取设备屏宽
     function getScreenWidth() {
         return scr.width || 0;
     }
 
+    // 获取设备屏高
     function getScreenHeight() {
         return scr.height || 0;
     }
 
+    // 获取设备用户代理
     function getUserAgent() {
         return nav.userAgent || '';
     }
 
+    // 获取区域
     function getLanguage($default = 'zh-CN') {
         return nav.language || $default;
     }
 
+    // 生成用户访问标识
     function getUserId() {
         return ((+new Date()).toString(36) + Math.random().toString(36).substr(2, 3));
     }
 
+    // 上报数据
     function report(data, prefix) {
 
+        let userId = Cookies.get(userCookieKey);
+        if (userId === undefined) {
+            userId = getUserId();
+            Cookies.set(userCookieKey, userId);
+        }
 
-
+        data.user_id = userId;
         data.visit_time = (new Date()).valueOf();
         data.random = Math.random();
 
@@ -70,6 +79,7 @@ import cookie from 'js-cookie';
         report(event, 'event');
     }
 
+    // 构建查询字符串
     function httpBuildQuery(param) {
         let url = '';
         for (let field in param) {
