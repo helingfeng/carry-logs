@@ -21,7 +21,9 @@ var carryEvents = [];
 
 ## 定义事件埋点采集
 
-
+手动添加`carryEvents.push`到需要埋点的代码块中，如：
 ```javascript
-carryEvents.push({'track': '_trackEvent', 'action': 'music', 'label': 'play', 'value': 1});
+$('submit').on('click', function(){
+    carryEvents.push({'track': '_trackEvent', 'action': 'submit', 'label': 'click', 'value': 1});
+});
 ```
