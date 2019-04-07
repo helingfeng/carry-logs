@@ -37,12 +37,13 @@ import Cookies from 'js-cookie';
 
     // 生成用户访问标识
     function getUserId() {
-        return ((+new Date()).toString(36) + Math.random().toString(36).substr(2, 3));
+        return ((+new Date()).toString(36) + Math.random().toString(36).substr(2, 5));
     }
 
     // 上报数据
     function report(data, prefix) {
 
+        // 若当前用户不存在访客标识，则生成对应访客标识
         let userId = Cookies.get(userCookieKey);
         if (userId === undefined) {
             userId = getUserId();
