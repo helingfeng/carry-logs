@@ -7,8 +7,9 @@
 CarryLogs 分为服务器端与客户端两部分，客户端负责采集用户行为数据，服务端负责接收上报数据，并存储分析用户行为，
 使用数据可视化进行呈现。
 
-### 服务端（Server）
+### 服务端(Server)
 
+基于Laravel开发，用于编写DEMO示例
 ```shell
 # 进入服务端项目目录
 cd server
@@ -18,7 +19,7 @@ composer install
 php -S localhost:8888 server.php
 ```
     
-### 客户端（Client）
+### 客户端(Client)
 
 在页面头部添加`script`代码：
 ```javascript
