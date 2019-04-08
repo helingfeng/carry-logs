@@ -22,15 +22,10 @@ php -S localhost:8888 server.php
 
 在页面头部添加`script`代码：
 ```javascript
-var carryServer = ' http://localhost:8888';
-var carryEvents = [];
+var carryEvents = [], carryServer = 'http://localhost:8888';
 (function () {
-    var _carry = document.createElement('script');
-    _carry.type = 'text/javascript';
-    _carry.async = true;
-    _carry.src = '../src/main.js';
-    var _script = document.getElementsByTagName('script')[0];
-    _script.parentNode.insertBefore(_carry, _script);
+    var _carry = document.createElement('script');_carry.type = 'text/javascript';_carry.async = true;_carry.src = '../src/main.js';
+    var _script = document.getElementsByTagName('script')[0];_script.parentNode.insertBefore(_carry, _script);
 })();
 ```
 
