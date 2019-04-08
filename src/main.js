@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 
 ;(function (win, doc, scr, nav) {
 
-    var carryServer = win.carryServer || 'https://tongji.helingfeng.com';
+    var carryServer = win.carryServer || 'http://localhost:8888';
     var userCookieKey = 'carry_user_id';
 
     // 获取域名

@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/page_view.gif', "Receiver\PageViewReceiver@receive");
+
+Route::get('/event.gif', "Receiver\EventReceiver@receive");
+
+Route::get('/error.gif', "Receiver\ErrorReceiver@receive");

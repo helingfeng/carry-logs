@@ -4,10 +4,22 @@
 
 ## 如何使用？
 
-在页面头部添加`script`代码：
+### 启动服务器
 
+```shell
+# 进入服务端项目目录
+cd server
+# 安装依赖
+composer install
+# 启动服务并绑定端口
+php -S localhost:8888 server.php
+```
+    
+### 添加统计代码
+
+在页面头部添加`script`代码：
 ```javascript
-var carryServer = 'https://carry.helingfeng.com';
+var carryServer = ' http://localhost:8888';
 var carryEvents = [];
 (function () {
     var _carry = document.createElement('script');
